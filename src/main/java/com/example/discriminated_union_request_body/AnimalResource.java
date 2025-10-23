@@ -13,13 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class AnimalResource {
   @PostMapping("/animals")
   public ResponseEntity<String> create(@RequestBody Animal animal) {
-    if (animal instanceof Fish) {
-      return ResponseEntity.ok(
-          "%s fish created!".formatted(((Fish) animal).getSalty() ? "Salty" : "Fresh water"));
-    } else if (animal instanceof Cat) {
-      return ResponseEntity.ok("%s the cat was created!".formatted(((Cat) animal).getName()));
-    }
+    return ResponseEntity.ok(
+        switch (animal) {
+          case Fish fish -> "%s fish created!".formatted(fish.salty() ? "Salty" : "Fresh water");
 
-    return ResponseEntity.badRequest().body("unable to resolve the animal");
+          case Cat cat -> "%s the cat was created!".formatted(cat.name());
+        });
   }
 }

@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.swagger.v3.oas.annotations.media.DiscriminatorMapping;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
 
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
@@ -23,14 +22,8 @@ import lombok.Data;
       @DiscriminatorMapping(value = "Fish", schema = Fish.class),
       @DiscriminatorMapping(value = "Cat", schema = Cat.class)
     })
-public interface Animal {
-  @Data
-  class Fish implements Animal {
-    private Boolean salty;
-  }
+public sealed interface Animal {
+  record Fish(Boolean salty) implements Animal {}
 
-  @Data
-  class Cat implements Animal {
-    private String name;
-  }
+  record Cat(String name) implements Animal {}
 }
