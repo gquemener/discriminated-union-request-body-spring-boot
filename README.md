@@ -14,6 +14,12 @@ Start the application through your IDE or CLI:
 $ ./gradlew bootRun
 ```
 
+You may now access:
+
+- [Swagger UI](http://localhost:8080/swagger-ui/index.html)
+- [OpenApi Spec (json)](http://localhost:8080/v3/api-docs)
+- [OpenApi Spec (yaml)](http://localhost:8080/v3/api-docs.yaml)
+
 ## Examples
 
 ```
