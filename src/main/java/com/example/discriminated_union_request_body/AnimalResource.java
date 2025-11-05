@@ -15,9 +15,9 @@ public class AnimalResource {
   public ResponseEntity<String> create(@RequestBody Animal animal) {
     return ResponseEntity.ok(
         switch (animal) {
-          case Fish fish -> "%s fish created!".formatted(fish.salty() ? "Salty" : "Fresh water");
-
-          case Cat cat -> "%s the cat was created!".formatted(cat.name());
+          case Fish(Boolean salty) ->
+              "%s fish created!".formatted(Boolean.TRUE.equals(salty) ? "Salty" : "Fresh water");
+          case Cat(String name) -> "%s the cat was created!".formatted(name);
         });
   }
 }
